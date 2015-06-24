@@ -1,0 +1,6 @@
+<?php
+
+/**
+ * Testing configuration.
+ */
+return [];

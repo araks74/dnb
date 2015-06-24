@@ -1,0 +1,6 @@
+<?php
+
+/**
+ * Staging configuration.
+ */
+return [];

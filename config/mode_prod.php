@@ -1,0 +1,6 @@
+<?php
+
+/**
+ * Production configuration.
+ */
+return [];
