@@ -4,15 +4,40 @@
  * All properties can be overridden in mode_<mode>.php files.
  */
 use app\models\User;
+use yii\twig\ViewRenderer;
 use yii\caching\MemCache;
 use yii\helpers\ArrayHelper;
 use yii\log\SyslogTarget;
 use yii\swiftmailer\Mailer;
+use yii\web\View;
 
 $common = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'layout' => 'main.twig',
     'components' => [
+        'view' => [
+            'class' => View::class,
+            'renderers' => [
+                'twig' => [
+                    'class' => ViewRenderer::class,
+                    'cachePath' => '@runtime/Twig/cache',
+                    'options' => [
+                        'auto_reload' => true,
+                    ],
+                    'globals' => [
+                        'html' => '\yii\helpers\Html',
+                        'yii' => 'Yii',
+                    ],
+                    'uses' => ['yii\bootstrap'],
+                ],
+            ],
+        ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [],
+        ],
         'cache' => [
             'class' => MemCache::class,
             'servers' => [

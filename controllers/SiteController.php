@@ -49,7 +49,7 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->render('index.twig');
     }
 
     public function actionLogin()
@@ -91,6 +91,6 @@ class SiteController extends Controller
 
     public function actionAbout()
     {
-        return $this->render('about');
+        return $this->render('about.twig');
     }
 }
