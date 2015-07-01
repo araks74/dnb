@@ -10,7 +10,7 @@
 
 ### Настройка веб-сервера (nginx)
 
-```
+```nginx
     server {
         set $yii_bootstrap "index.php";
         charset utf-8;
