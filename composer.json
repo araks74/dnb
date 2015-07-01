@@ -46,9 +46,6 @@
                     "yii": "0755"
                 }
             ]
-//            ,"generateCookieValidationKey": [
-//                "config/web.php"
-//            ]
         },
         "asset-installer-paths": {
             "npm-asset-library": "vendor/npm",
