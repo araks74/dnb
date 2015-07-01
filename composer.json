@@ -21,7 +21,8 @@
         "yiisoft/yii2-twig": "~2.0.4",
         "janisto/yii2-environment": "~1.1.1",
         "rmrevin/yii2-fontawesome": "~2.11.0",
-        "codegyre/robo": "~0.5.0"
+        "codegyre/robo": "~0.5.0",
+        "vlucas/phpdotenv": "~2.0.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "~2.0.4",

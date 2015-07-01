@@ -56,12 +56,12 @@ $common = [
                     'levels' => ['info'],
                     'categories' => ['application'],
                     'logVars' => [],
-                    'identity' => $_SERVER['HTTP_HOST'],
+                    'identity' => 'dnb',
                 ],
                 [
                     'class' => SyslogTarget::class,
                     'levels' => ['error', 'warning'],
-                    'identity' => $_SERVER['HTTP_HOST'],
+                    'identity' => 'dnb',
                     'except' => ['except' => 'yii\web\HttpException:404'],
                 ],
             ],
@@ -86,10 +86,9 @@ return [
     'web' => ArrayHelper::merge(
         $common,
         [
-            'id' => 'basic',
+            'id' => 'dnb',
             'components' => [
                 'request' => [
-                    // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
                     'cookieValidationKey' => 'ce2Nx6qwzHm2OxYLqlAGqRYA7u02Jq5A',
                 ],
                 'user' => [
@@ -105,7 +104,7 @@ return [
     'console' => ArrayHelper::merge(
         $common,
         [
-            'id' => 'basic-console',
+            'id' => 'dnb-console',
             'bootstrap' => ['log'],
             'controllerNamespace' => 'app\commands',
             'components' => [
