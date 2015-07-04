@@ -4,66 +4,45 @@
 
 ### Необходимые зависимости
 
-* Настроенный веб-сервер
-* PHP
-* MySql сервер
+* [Virtualbox](https://www.virtualbox.org/)
+* [Vagrant](https://www.vagrantup.com/)
 
-### Настройка веб-сервера (nginx)
+### Развёртывание
 
-```nginx
-    server {
-        set $yii_bootstrap "index.php";
-        charset utf-8;
-        client_max_body_size 128M;
-    
-        listen 127.0.0.1:80;
-        server_name dnb.dev;
-        root		path_to_project/web;
-        index		$yii_bootstrap;
-    
-        location / {
-            index index.php index.html index.htm;
-            try_files $uri $uri/ @yii;
-        }
-    
-        location ~* ^.+\.(jpg|jpeg|gif|png|ico|css|txt|js|bmp)$ {
-            expires -1;
-        }
-    
-        location @yii {
-            include fastcgi.conf;
-            fastcgi_pass phpfpm;
-            add_header X-Content-Type-Options nosniff;
-            fastcgi_param SCRIPT_FILENAME $document_root/index.php;
-            fastcgi_param PATH_INFO $fastcgi_script_name;
-        }
-    
-        location ~ \.php$ {
-            include fastcgi.conf;
-            fastcgi_pass unix:/run/phpfpm.sock;
-            fastcgi_index index.php;
-            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        }
-    }
-```
+```bash
+# Получение исходников
+git clone https://bitbucket.org/miramir/dnb.git dnb
+cd ./dnb
 
-### Особенности настройки php-окружения
+# Создание необходимых файлов
+cp ./config/db.examle.php ./config/db.php
+cp ./.env.examle ./.env
 
-В переменных окружения при разработке должна быть установлена переменная YII_ENV равная 'dev'.
-Для этого в корневой папке приложения нужно разместить файлик .env, со следующим содержимым:
-```
-    YII_ENV=dev
-```
+# Запуск виртуального окружения
+vagrant up
 
-### Первое развёртывание
+# Вход в виртуальное окружение
+vagrant ssh
 
-```php
-    composer create-project --repository-url="http://composer.is74.ru" -sdev miramir/dnb dnb
+# Запуск команды обновления
+cd /var/www/dnb
+./vendor/bin/robo update
 ```
 
 ### Обновление
 
-Пока через ```git pull``` и руками. Чуть позже будет более просто.
+В каталоге проекта выполнить следующие команды
+```bash
+# Запуск виртуального окружения
+vagrant up
+
+# Вход в виртуальное окружение
+vagrant ssh
+
+# Запуск команды обновления
+cd /var/www/dnb
+./vendor/bin/robo update
+```
 
 ## Стили кодирования
 

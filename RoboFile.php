@@ -6,9 +6,6 @@
  */
 class RoboFile extends \Robo\Tasks
 {
-    use Robo\Output;
-    use Robo\Task\Exec;
-
     public function update($opts = ['dev' => false])
     {
         $this->taskGitStack()->stopOnFail()->pull()->run();

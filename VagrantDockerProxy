@@ -1,0 +1,12 @@
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.define "docker-proxy" do |v|
+    v.vm.box = "dduportal/boot2docker"
+    config.vm.network :forwarded_port, host: 8000, guest: 8000
+
+    config.vm.provider "virtualbox" do |v|
+      v.name = "docker-proxy"
+    end
+  end
+end
