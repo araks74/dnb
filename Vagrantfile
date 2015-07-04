@@ -15,9 +15,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       d.build_args = ["--tag", d.name]
 
       if RUBY_PLATFORM.downcase =~ /win32|mingw32/
-        d.volumes = ["/vagrant:/var/www/dnb"]
+        d.volumes = ["/vagrant:/var/www/www-data"]
       else
-        d.volumes = [Dir.pwd + ":/var/www/dnb"]
+        d.volumes = [Dir.pwd + ":/var/www/www-data"]
       end
       
       if ENV['DOCKER_AGENT_TAG']

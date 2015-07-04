@@ -11,6 +11,7 @@ ADD ./docker/nginx-vhost.conf /etc/nginx/sites-available/default
 ADD ./docker/docker_rsa.pub /tmp/docker_rsa.pub
 
 RUN mkdir -p /root/.ssh && cat /tmp/docker_rsa.pub >> /root/.ssh/authorized_keys && \
+    mkdir -p /var/www/www-data && \
     composer selfupdate
 
 EXPOSE 80

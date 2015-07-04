@@ -15,7 +15,6 @@ git clone https://bitbucket.org/miramir/dnb.git dnb
 cd ./dnb
 
 # Создание необходимых файлов
-cp ./config/db.examle.php ./config/db.php
 cp ./.env.examle ./.env
 
 # Запуск виртуального окружения
@@ -25,22 +24,17 @@ vagrant up
 vagrant ssh
 
 # Запуск команды обновления
-cd /var/www/dnb
+cd /var/www/www-data
+composer install --dev
+./vendor/bin/robo init:all
 ./vendor/bin/robo update
 ```
 
 ### Обновление
 
-В каталоге проекта выполнить следующие команды
+Внутри виртуального окружения выполнить
 ```bash
-# Запуск виртуального окружения
-vagrant up
-
-# Вход в виртуальное окружение
-vagrant ssh
-
-# Запуск команды обновления
-cd /var/www/dnb
+cd /var/www/www-data
 ./vendor/bin/robo update
 ```
 
