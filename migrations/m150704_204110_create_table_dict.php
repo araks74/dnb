@@ -11,10 +11,10 @@ class m150704_204110_create_table_dict extends Migration
             'dictionary',
             [
                 'id' => Schema::TYPE_PK,
-                'type' => Schema::TYPE_SMALLINT . ' NOT NULL',
-                'value' => Schema::TYPE_STRING . ' NOT NULL',
+                'type' => Schema::TYPE_SMALLINT . ' NOT NULL' . ' COMMENT "Тип значения"',
+                'value' => Schema::TYPE_STRING . ' NOT NULL' . ' COMMENT "Значение"',
             ],
-            'DEFAULT CHARSET UTF8'
+            'DEFAULT CHARSET UTF8' . ' COMMENT "Словари для автодополнения"'
         );
 
         $data = file(Yii::getAlias('@app') . '/data/professions.txt');

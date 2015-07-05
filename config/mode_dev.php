@@ -11,7 +11,10 @@ return [
     'web'=>[
         'bootstrap' => ['log', 'gii', 'debug'],
         'modules' => [
-            'gii' => yii\gii\Module::class,
+            'gii' => [
+                'class' => yii\gii\Module::class,
+                'allowedIPs' => ['172.17.42.*', '127.0.0.1']
+            ],
             'debug' => yii\debug\Module::class,
         ],
         'components' => [

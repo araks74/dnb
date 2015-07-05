@@ -11,9 +11,9 @@ class m150704_175553_create_table_city extends Migration
             'city',
             [
                 'id' => Schema::TYPE_PK,
-                'name' => Schema::TYPE_STRING . ' NOT NULL'
+                'name' => Schema::TYPE_STRING . ' NOT NULL COMMENT "Название города"'
             ],
-            'DEFAULT CHARSET UTF8'
+            'DEFAULT CHARSET UTF8 COMMENT "Таблица городов"'
         );
 
         $data = file(Yii::getAlias('@app') . '/data/city.txt');
