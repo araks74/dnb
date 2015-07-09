@@ -1,0 +1,34 @@
+{{ use('yii/helpers/Html') }}
+{{ use('yii/bootstrap/ActiveForm') }}
+
+{{ set(this, 'title', 'Добро пожаловать') }}
+
+<div class="row">
+    <div class="col-lg-6 col-lg-offset-3 site-login">
+        <h1>{{ this.title }}</h1>
+
+        {% set form = active_form_begin({
+            'id' : 'login-form',
+            'options' : {'class' : 'form-horizontal'},
+            'action' : path('/user/login', {'alias' : post.alias}),
+            'method' : 'POST',
+            'fieldConfig' : {
+            'template' : "<div class='row'>{label}\n<div class='col-lg-8'>{input}</div></div>\n<div class='row'><div class='col-lg-8 col-lg-offset-4'>{error}</div></div>",
+            'labelOptions' : {'class' : 'col-lg-4 control-label'},
+        }
+        }) %}
+
+        {{ form.field(model, 'username') | raw }}
+        {{ form.field(model, 'password').passwordInput() | raw }}
+        {{ form.field(model, 'rememberMe', {
+            'template' : "<div class=\"col-lg-offset-4 col-lg-3\">{input}</div>\n<div class=\"col-lg-5\">{error}</div>"
+        }).checkbox() | raw }}
+
+        <div class="form-group">
+            <div class="col-lg-offset-1 col-lg-11">
+                <input type="submit" value="Вход" class="btn btn-primary" name='login-button'/>
+            </div>
+        </div>
+        {{ active_form_end() }}
+    </div>
+</div>

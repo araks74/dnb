@@ -92,15 +92,23 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
 
     /**
+     * Поиск по одному из аттрибутов username или phone
      * @param $credential
      * @return static
      */
     public static function findByCredential($credential)
     {
+        $user = static::findOne(['username' => $credential]);
+        if ($user === null) {
+            $user = static::findOne(['phone' => $credential]);
+        }
+
+        return $user;
     }
 
     /**
      * @inheritdoc
+     * @throws \LogicException
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
@@ -120,7 +128,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public function getAuthKey()
     {
-        // TODO: Implement getAuthKey() method.
+        return $this->authKey;
     }
 
     /**
@@ -128,15 +136,32 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public function validateAuthKey($authKey)
     {
-        // TODO: Implement validateAuthKey() method.
+        return $this->authKey === $authKey;
     }
 
     /**
      * @param string $password
      * @return bool
+     * @throws \yii\base\InvalidConfigException
      */
     public function validatePassword($password)
     {
-        return true;
+        return Yii::$app->getSecurity()->validatePassword($password, $this->password);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                $this->authKey = \Yii::$app->security->generateRandomString();
+            }
+
+            return true;
+        }
+
+        return false;
     }
 }

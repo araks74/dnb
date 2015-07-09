@@ -14,7 +14,6 @@ use yii\web\View;
 $common = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'layout' => 'main.twig',
     'components' => [
         'view' => [
             'class' => View::class,
@@ -36,7 +35,9 @@ $common = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [],
+            'rules' => [
+                '/login' => '/user/login'
+            ],
         ],
         'cache' => [
             'class' => MemCache::class,
@@ -94,6 +95,7 @@ return [
                 'user' => [
                     'identityClass' => User::class,
                     'enableAutoLogin' => true,
+                    'loginUrl' => ['/user/login'],
                 ],
                 'errorHandler' => [
                     'errorAction' => 'site/error',
