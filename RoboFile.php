@@ -24,7 +24,7 @@ class RoboFile extends \Robo\Tasks
     {
         $this->say('Try migrate ...');
 
-        return $this->taskExec($yiiCommandPath . ' migrate --interactive=0')->run();
+        return $this->taskExec('php ' . $yiiCommandPath . ' migrate --interactive=0')->run();
     }
 
     public function initDb()
@@ -53,9 +53,13 @@ class RoboFile extends \Robo\Tasks
 
     public function initPermission()
     {
-        $this->taskExec('find /var/www/www-data -type f -exec setfacl -m g:www-data:rw -m u:www-data:rw {} \;')->run();
-        $this->taskExec('find /var/www/www-data -type d -exec setfacl -m g:www-data:rwX -m u:www-data:rwX {} \;')->run();
-        $this->taskExec('find /var/www/www-data -type d -exec setfacl -d -m g:www-data:rwX -m u:www-data:rwX {} \;')->run();
+        $this->taskExecStack()
+            ->stopOnFail()
+            ->exec('setfacl -m g:www-data:rw -m u:www-data:rw /var/www/www-data')
+            ->exec('find /var/www/www-data -type f -exec setfacl -m g:www-data:rw -m u:www-data:rw {} \;')
+            ->exec('find /var/www/www-data -type d -exec setfacl -m g:www-data:rwX -m u:www-data:rwX {} \;')
+            ->exec('find /var/www/www-data -type d -exec setfacl -d -m g:www-data:rwX -m u:www-data:rwX {} \;')
+            ->run();
     }
 
     public function initAll()
