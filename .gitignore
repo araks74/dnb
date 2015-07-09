@@ -7,3 +7,4 @@
 /config/db.php
 /config/local.php
 .env
+.vagrant

@@ -27,7 +27,7 @@ vagrant ssh
 cd /var/www/www-data
 composer install --dev
 ./vendor/bin/robo init:all
-./vendor/bin/robo update
+./vendor/bin/robo update --dev
 ```
 
 ### Обновление
@@ -35,14 +35,13 @@ composer install --dev
 Внутри виртуального окружения выполнить
 ```bash
 cd /var/www/www-data
-./vendor/bin/robo update
+./vendor/bin/robo update --dev
 ```
 
 ## Стили кодирования
 
 * Для php должен использоваться [PSR1/PSR2](http://www.php-fig.org/psr/psr-2/ru/)
 * Для javascript должен использоваться [jQuery Style Guide](http://contribute.jquery.org/style-guide/js/)
-* Для шаблонов используем twig - [его стиль кодирования](http://twig.sensiolabs.org/doc/coding_standards.html)
 * С остальным разберёмся чуть позже.
 * При разработке лучше всего использовать IDE PHPStorm
 
@@ -59,11 +58,6 @@ cd /var/www/www-data
 
 * [Bootstrap3](http://getbootstrap.com/)
 * [yii2-bootstrap](http://www.yiiframework.com/doc-2.0/ext-bootstrap-index.html)
-
-### Twig
-
-* [Twig](http://twig.sensiolabs.org/documentation)
-* [yii2-twig](http://www.yiiframework.com/doc-2.0/ext-twig-index.html)
 
 ### Остальное
 
